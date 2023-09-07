@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -xe
+cd "$(dirname "$(realpath "$0")")"
+HOMEBREW_VERSION="$1"
+
+mkdir -p homebrew
+curl -L https://github.com/Homebrew/brew/tarball/${HOMEBREW_VERSION} | tar xz --strip 1 -C homebrew
+
+# Hacky patch to get all my hacks to work ;)
+patch -f -p0 <<'EOF'
+--- homebrew/bin/brew
++++ homebrew/bin/brew
+@@ -47,7 +47,7 @@ do
+ done
+ unset cmd
+
+-BREW_FILE_DIRECTORY="$(quiet_cd "${0%/*}/" && pwd -P)"
++BREW_FILE_DIRECTORY="$(quiet_cd "${0%/*}/" && pwd)"
+ HOMEBREW_BREW_FILE="${BREW_FILE_DIRECTORY%/}/${0##*/}"
+ HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/*/*}"
+EOF
+
+mv homebrew _opt_homebrew/
+
+# Environment Setup
+cp env.sh _opt_homebrew/.env.sh
+# cp adeinit _opt_homebrew/.adeinit
+
+# Use _opt_homebrew for readability, rename to _opt b/c it's expected by Dockerfile
+mv _opt_homebrew _opt
