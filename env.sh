@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -e
-
 export HOMEBREW_ADE_PREFIX="$HOME/.linuxbrew"
 export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 export HOMEBREW_NO_AUTO_UPDATE=1
