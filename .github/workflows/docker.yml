@@ -3,7 +3,7 @@ name: Deploy ignaciovizzo/ade-brew
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "*.*.*"
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
