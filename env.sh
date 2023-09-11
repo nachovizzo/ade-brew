@@ -10,6 +10,7 @@ fi
 if [[ ! -d "${HOMEBREW_PREFIX}" ]]; then
     sudo mkdir -p /home/linuxbrew
     sudo ln -s ${HOMEBREW_ADE_PREFIX} ${HOMEBREW_PREFIX} || true
+    sudo chown -R $(whoami) /home/linuxbrew
 fi
 
 # Source Homebrew, the rest is story
