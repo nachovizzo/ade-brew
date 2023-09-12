@@ -11,6 +11,9 @@ if [[ ! -d "${HOMEBREW_PREFIX}" ]]; then
     sudo mkdir -p /home/linuxbrew
     sudo ln -s ${HOMEBREW_ADE_PREFIX} ${HOMEBREW_PREFIX} || true
     sudo chown -R $(whoami) /home/linuxbrew
+    # Yet another strange symlink. Some bottles can't solve the prefix and look for /linuxbrew
+    sudo ln -s /home/linuxbrew /linuxbrew || true
+    sudo chown -R $(whoami) /linuxbrew
 fi
 
 # Source Homebrew, the rest is story
