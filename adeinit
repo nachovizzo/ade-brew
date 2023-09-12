@@ -3,7 +3,7 @@ replace_pkg_version() {
     PKG="$1"
     DEFAULT_VERSION="$2"
     REQUIRED_VERSION="$3"
-    INSTALLED_VERSION="$(${PKG} --version)"
+    INSTALLED_VERSION="$(${PKG} --version 2>/dev/null)"
 
     # Quick runnaway in case stuff is already propperly linked
     if echo $INSTALLED_VERSION | grep $REQUIRED_VERSION >/dev/null; then
