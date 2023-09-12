@@ -24,7 +24,7 @@ mv homebrew _opt_homebrew/
 
 # Environment Setup
 cp env.sh _opt_homebrew/.env.sh
-# cp adeinit _opt_homebrew/.adeinit
+cp adeinit _opt_homebrew/.adeinit
 
 # Use _opt_homebrew for readability, rename to _opt b/c it's expected by Dockerfile
 mv _opt_homebrew _opt

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+# If you are using Homebrew on Ubuntu22.04 then the system wide Python and Ruby installations will
+# conflict. For this we will force brew to use python@3.10 and ruby@3.2
+
+# If python@3.11 is present unlink. If python 3.10 is present then link
+brew list --versions python@3.11 >/dev/null || brew unlink python
+brew list --versions python@3.10 >/dev/null && brew link python@3.10
+
+# Same as before
+brew list --versions ruby@3.2 >/dev/null || brew unlink ruby
+brew list --versions ruby@3.0 >/dev/null && brew link ruby@3.0
