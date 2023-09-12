@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-set -e
-
 replace_pkg_version() {
     PKG="$1"
     DEFAULT_VERSION="$2"
     REQUIRED_VERSION="$3"
+    INSTALLED_VERSION="$(${PKG} --version)"
 
+    # Quick runnaway in case stuff is already propperly linked
+    if echo $INSTALLED_VERSION | grep $REQUIRED_VERSION >/dev/null; then
+        return
+    fi
+
+    # Fast check
     # First check if the default brew version is installed and unlink it
     if $(brew list --versions ${PKG}@${DEFAULT_VERSION} >/dev/null); then
         brew unlink ${PKG}
