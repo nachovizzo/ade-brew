@@ -21,3 +21,4 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 # in this env, which sucks :)
 export PATH="$HOMEBREW_PREFIX/opt/python@3.10/libexec/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:/usr/lib/python3/dist-packages/
+export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
