@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 set -e
+
+replace_pkg_version() {
+    PKG="$1"
+    DEFAULT_VERSION="$2"
+    REQUIRED_VERSION="$3"
+
+    # First check if the default brew version is installed and unlink it
+    if $(brew list --versions ${PKG}@${DEFAULT_VERSION} >/dev/null); then
+        brew unlink ${PKG}
+    fi
+
+    # Then check if the supported version is installed and force link it
+    if $(brew list --versions ${PKG}@${REQUIRED_VERSION} >/dev/null); then
+        brew link --force ${PKG}@${REQUIRED_VERSION}
+    fi
+    # If non are installed then, skip everything
+}
+
 # If you are using Homebrew on Ubuntu22.04 then the system wide Python and Ruby installations will
 # conflict. For this we will force brew to use python@3.10 and ruby@3.2
-
-# If python@3.11 is present unlink. If python 3.10 is present then link
-brew list --versions python@3.11 >/dev/null || brew unlink python
-brew list --versions python@3.10 >/dev/null && brew link python@3.10
-
-# Same as before
-brew list --versions ruby@3.2 >/dev/null || brew unlink ruby
-brew list --versions ruby@3.0 >/dev/null && brew link ruby@3.0
+replace_pkg_version python 3.11 3.10
+replace_pkg_version ruby 3.2 3.0
